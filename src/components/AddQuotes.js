@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 
 export default function AddQuotes() {
 
     const Styles = {
+        root: {
+            display: 'flex',
+            flexDirection: 'row'
+        },
         infoContainer: {
             display: 'flex',
             flexDirection: 'column'
@@ -26,6 +30,8 @@ export default function AddQuotes() {
         education: ""
     })
 
+    const [newQuotes, setNewQuotes] = useState([]);
+
     const handleChange = (e) => {
         let value = e.target.value;
         setAuthorInfo({
@@ -35,14 +41,44 @@ export default function AddQuotes() {
     }
 
     const handleSubmit = () => {
-        console.log(authorInfo)
+        //console.log(authorInfo)
+        console.log(newQuotes)
+    }
+
+    const QuoteField = (props) => {
+
+        const [ displayQuote, setDisplayQuote ] = useState("")
+
+        const handleChange = (e) => {
+            setDisplayQuote(e.target.value);
+        }
+
+        const addQuote = () => {
+
+            let a = [...props.quoteObject];
+            a.push(displayQuote)
+            props.setQuoteObject(a)
+            setDisplayQuote("")
+        }
+
+        return (
+            <Box sx={{display: 'flex', flexDirection: 'row'}}>
+                <TextField
+                    name='quote'
+                    label='quote'
+                    value={displayQuote}
+                    onChange={handleChange}
+                />
+                <Button onClick={addQuote}>Add</Button>
+            </Box>
+        )
     }
 
     return (
         <>
-            <Box>
-                <Box style={Styles.infoContainer}>
+            <Box style={Styles.root}>
 
+                <Box style={Styles.infoContainer}>
                     <TextField
                         name='name'
                         label='name'
@@ -105,10 +141,13 @@ export default function AddQuotes() {
                         variant='outlined'
                         sx={Styles.formStyle}
                     />
+                </Box>
 
+                <Box>   
+                    <QuoteField quoteObject={newQuotes} setQuoteObject={setNewQuotes}/>
                 </Box>
                 
-                <button onClick={handleSubmit}>TEST</button>
+                <Button onClick={handleSubmit}>TEST</Button>
             </Box>
         </>
     )
