@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
+import ShowQuotes from "./ShowQuotes";
 
 export default function AddQuotes() {
 
@@ -14,7 +15,7 @@ export default function AddQuotes() {
         },
         formStyle: {
             marginTop: '2%',
-            width: '35em',
+            width: '25em',
         }
     }
 
@@ -41,8 +42,39 @@ export default function AddQuotes() {
     }
 
     const handleSubmit = () => {
-        //console.log(authorInfo)
-        console.log(newQuotes)
+
+        const data = {
+            "name": authorInfo.name,
+            "image": authorInfo.imageUrl,
+            "bio": {
+                "desc": authorInfo.desc,
+                "life": authorInfo.life,
+                "wiki": authorInfo.wiki,
+                "networth": authorInfo.networth,
+                "education": authorInfo.education
+            },
+            "quotes": newQuotes
+        }
+        
+        fetch('http://localhost:4000/edit/addquotes',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+    }
+
+    const removeQuote = (quoteToRemove) => {
+
+        let quotesCopy = [...newQuotes];
+
+        quotesCopy = quotesCopy.filter((item) => {
+            return  item !== quoteToRemove           
+        });
+
+        setNewQuotes(quotesCopy)
+        
     }
 
     const QuoteField = (props) => {
@@ -61,6 +93,14 @@ export default function AddQuotes() {
             setDisplayQuote("")
         }
 
+        const addQuoteEnter = (e) => {
+            let code = e.keyCode || e.which;
+            if(code === 13){
+                addQuote();
+            }
+        }
+
+
         return (
             <Box sx={{display: 'flex', flexDirection: 'row'}}>
                 <TextField
@@ -68,8 +108,9 @@ export default function AddQuotes() {
                     label='quote'
                     value={displayQuote}
                     onChange={handleChange}
+                    onKeyPress={addQuoteEnter}
                 />
-                <Button onClick={addQuote}>Add</Button>
+                <Button onClick={addQuote} variant='outlined'>Add</Button>
             </Box>
         )
     }
@@ -141,13 +182,16 @@ export default function AddQuotes() {
                         variant='outlined'
                         sx={Styles.formStyle}
                     />
+
+                    <Button onClick={handleSubmit}>Submit</Button>
                 </Box>
 
                 <Box>   
                     <QuoteField quoteObject={newQuotes} setQuoteObject={setNewQuotes}/>
+                    <ShowQuotes data={newQuotes} removeQuoteFunction={removeQuote}/>
                 </Box>
                 
-                <Button onClick={handleSubmit}>TEST</Button>
+                
             </Box>
         </>
     )
