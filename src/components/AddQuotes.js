@@ -44,7 +44,7 @@ export default function AddQuotes() {
     const handleSubmit = () => {
 
         const data = {
-            "name": authorInfo.name,
+            "name": authorInfo.name.toLowerCase(),
             "image": authorInfo.imageUrl,
             "bio": {
                 "desc": authorInfo.desc,
@@ -63,6 +63,19 @@ export default function AddQuotes() {
             },
             body: JSON.stringify(data),
         })
+
+        setAuthorInfo({
+            name: "",
+            quote: "",
+            imageUrl: "",
+            desc: "",
+            life: "",
+            wiki: "",
+            networth: "",
+            education: ""
+        })
+
+        setNewQuotes([])
     }
 
     const removeQuote = (quoteToRemove) => {
