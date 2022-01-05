@@ -15,7 +15,7 @@ export default function Home(){
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:4000/admin/checklogin',{
+        fetch('https://financequotesapi.herokuapp.com/admin/checklogin',{
             method: 'POST',
             mode: 'cors',
             headers: {

@@ -56,7 +56,7 @@ export default function AddQuotes() {
             "quotes": newQuotes
         }
         
-        fetch('http://localhost:4000/edit/addquotes',{
+        fetch('https://financequotesapi.herokuapp.com/edit/addquotes',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
