@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Api-Manager-Dashboard/static/css/main.073c9b0a.css",
-    "main.js": "/Api-Manager-Dashboard/static/js/main.f2acdaf1.js",
+    "main.js": "/Api-Manager-Dashboard/static/js/main.ba487288.js",
     "static/js/787.bf2a8292.chunk.js": "/Api-Manager-Dashboard/static/js/787.bf2a8292.chunk.js",
     "index.html": "/Api-Manager-Dashboard/index.html",
     "main.073c9b0a.css.map": "/Api-Manager-Dashboard/static/css/main.073c9b0a.css.map",
-    "main.f2acdaf1.js.map": "/Api-Manager-Dashboard/static/js/main.f2acdaf1.js.map",
+    "main.ba487288.js.map": "/Api-Manager-Dashboard/static/js/main.ba487288.js.map",
     "787.bf2a8292.chunk.js.map": "/Api-Manager-Dashboard/static/js/787.bf2a8292.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.f2acdaf1.js"
+    "static/js/main.ba487288.js"
   ]
 }
